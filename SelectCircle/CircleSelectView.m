@@ -17,7 +17,7 @@
     NSArray * _BtnImagesArray; //按钮的图片数组
     NSArray * _BtnHeightImagesArray; //按钮的高亮图片数组
     NSArray * _weakSelfColors;//自身背景颜色值
-    NSInteger  _BtnNumbers; //按钮的个数
+
     CGSize _BtnSize; //单个btn 大小
     
     NSDate * _TouchDate ; //触碰时间
@@ -73,6 +73,10 @@
 - (void)CreateHeaderImageUI{
     
     UIButton * centerBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+    centerBtn.backgroundColor =[UIColor whiteColor];
+    [self addSubview:centerBtn];
+    [self bringSubviewToFront:centerBtn];
+    
     UIImage *image;
     if ([self.centerImage length])
     {
@@ -82,19 +86,21 @@
     {
         image =[UIImage imageNamed:@"image.bundle/222.png"];
     }
-    [centerBtn setImage:image forState:UIControlStateNormal];
-    [self addSubview:centerBtn];
-    [self bringSubviewToFront:centerBtn];
-    centerBtn.backgroundColor =[UIColor grayColor];
-    centerBtn.frame =CGRectMake(0, 0, 100, 100);
+    if (self.centerButtonSize.width>0)
+    {
+        centerBtn.frame =CGRectMake(0, 0, self.centerButtonSize.width, self.centerButtonSize.height);
+    }
+    else
+    {
+        centerBtn.frame =CGRectMake(0, 0, 100, 100);
+    }
     centerBtn.center =CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
-    
+    [centerBtn setImage:image forState:UIControlStateNormal];
+    //切圆形
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:centerBtn.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:centerBtn.bounds.size];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
     maskLayer.frame = centerBtn.bounds;
     maskLayer.path = maskPath.CGPath;
-    maskLayer.borderColor =[UIColor whiteColor].CGColor;
-    maskLayer.borderWidth =2.0;
     centerBtn.layer.mask = maskLayer;
 }
 /*
@@ -103,8 +109,8 @@
 - (void)CreateSelfViewUI:(CGRect)frame{
     
     self.backgroundColor =[UIColor whiteColor];
-    self.layer.cornerRadius =frame.size.height/2;
-    //阴影
+    self.layer.cornerRadius =self.frame.size.height/2;
+    //加阴影
     self.layer.shadowPath =[UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.bounds.size.height/2].CGPath;
     self.layer.shadowOffset = CGSizeMake(0, 0);
     self.layer.shadowOpacity = 0.5;
@@ -122,6 +128,11 @@
     if ([self.delegate respondsToSelector:@selector(buttonTitleWithItems)]) {
         _BtnTitlesArray =[self.delegate buttonTitleWithItems];
     }
+    else
+    {
+        _BtnTitlesArray =@[@"一",@"二",@"三",@"四",@"五",@"六"];
+    }
+    
     //获取按钮的图片数组
     if ([self.delegate respondsToSelector:@selector(buttonImageWithItems)]) {
         _BtnImagesArray =[self.delegate buttonImageWithItems];
@@ -130,24 +141,23 @@
     if ([self.delegate respondsToSelector:@selector(buttonHeightImageWithItems)]) {
         _BtnHeightImagesArray =[self.delegate buttonHeightImageWithItems];
     }
+    
+    //获取扇形背景颜色
     if ([self.delegate respondsToSelector:@selector(weakSelfColors)]) {
         _weakSelfColors =[self.delegate weakSelfColors];
     }
-    //获取按钮的个数
-    if ([self.delegate respondsToSelector:@selector(buttonWithNumbers)]) {
-        _BtnNumbers =[self.delegate buttonWithNumbers];
-    }
     else
     {
-        _BtnNumbers =0;
+        _weakSelfColors =@[RGBColor(255, 0, 0),RGBColor(255, 153, 0),RGBColor(221, 221, 221),RGBColor(0, 0, 0),RGBColor(255, 153, 0),RGBColor(221, 221, 221)];
     }
+    
     //获取按钮的大小
     if ([self.delegate respondsToSelector:@selector(buttonWithSIze)]) {
         _BtnSize =[self.delegate buttonWithSIze];
     }
     else
     {
-        _BtnSize =CGSizeMake(0, 0);
+        _BtnSize =CGSizeMake(60, 60);
     }
 }
 /*
@@ -156,7 +166,7 @@
 - (void)CreateButtonUI{
     
     _BtnsArray = [NSMutableArray new];
-    for (NSInteger i =0; i<_BtnNumbers; i++) {
+    for (NSInteger i =0; i<[_BtnTitlesArray count]; i++) {
         UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
         [button addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         button.frame =CGRectMake(0, 0, _BtnSize.width, _BtnSize.height);
@@ -166,13 +176,13 @@
         [self addSubview:button];
         [_BtnsArray addObject:button];
         
-        if ([_BtnTitlesArray count] ==_BtnNumbers) {
-            [button setTitle:(NSString *)[_BtnTitlesArray objectAtIndex:i] forState:UIControlStateNormal];
-        }
-        if ([_BtnImagesArray count] ==_BtnNumbers) {
+        [button setTitle:(NSString *)[_BtnTitlesArray objectAtIndex:i] forState:UIControlStateNormal];
+        if ([_BtnImagesArray count] ==[_BtnTitlesArray count])
+        {
             [button setImage:[UIImage imageNamed:(NSString *)[_BtnImagesArray objectAtIndex:i]] forState:UIControlStateNormal];
         }
-        if ([_BtnHeightImagesArray count] ==_BtnNumbers) {
+        if ([_BtnHeightImagesArray count] ==[_BtnTitlesArray count])
+        {
             [button setImage:[UIImage imageNamed:(NSString *)[_BtnHeightImagesArray objectAtIndex:i]] forState:UIControlStateHighlighted];
         }
     }
@@ -185,8 +195,8 @@
  */
 - (void)BtnClick:(UIButton *)sender{
     
-    if ([_delegate respondsToSelector:@selector(ButtonClick:)]) {
-        [_delegate ButtonClick:sender.tag -BTNTAG];
+    if ([_delegate respondsToSelector:@selector(buttonClick:)]) {
+        [_delegate buttonClick:sender.tag -BTNTAG];
     }
 }
 /*
@@ -194,10 +204,10 @@
  */
 - (void)BtnsLayout{
     
-    for (NSInteger i=0; i<_BtnNumbers ;i++) {
+    for (NSInteger i=0; i<[_BtnTitlesArray count] ;i++) {
         
         UIButton *button=[_BtnsArray objectAtIndex:i];
-        CGFloat number =_BtnNumbers;
+        CGFloat number =[_BtnTitlesArray count];
         CGFloat yy=Radius+sin((i/number)*M_PI*2+RunAngle)*(self.frame.size.width/2-_BtnSize.width/2-SPACE);
         CGFloat xx=Radius+cos((i/number)*M_PI*2+RunAngle)*(self.frame.size.width/2-_BtnSize.width/2-SPACE);
         button.center=CGPointMake(xx, yy);
@@ -283,7 +293,7 @@
  */
 - (void)ReturnDefaultButton{
     
-    CGFloat number=_BtnNumbers;
+    CGFloat number=[_BtnTitlesArray count];
     NSNumber * end =[NSNumber numberWithFloat:0.5* (1/number) *M_PI];//横坐标对应0 ，-0 纵坐标对应1，-1
     NSNumber * start =[NSNumber numberWithFloat:-0.5* (1/number) *M_PI];
 
@@ -294,8 +304,8 @@
         if ([self getQuadrant:button.center] == 2 ||[self getQuadrant:button.center] == 3) { //红色区域和黑色区域对应的值相同，按象限划分
             
             if (value>[start doubleValue] && value< [end doubleValue]) {
-                if ([self.delegate respondsToSelector:@selector(DefaultReturnButton:)]) {
-                    [self.delegate DefaultReturnButton:button];
+                if ([self.delegate respondsToSelector:@selector(defaultReturnButton:)]) {
+                    [self.delegate defaultReturnButton:button];
                     break;
                 }
             }
@@ -308,7 +318,7 @@
  */
 - (double)RunAngleValue{
     
-    double number =_BtnNumbers;
+    double number =[_BtnTitlesArray count];
     
     double valuer =2 * M_PI /number; //每一格的弧度
     
@@ -363,10 +373,10 @@
  */
 - (void)drawViewUI{
     
-    CGFloat numbers =_BtnNumbers;
+    CGFloat numbers =[_BtnTitlesArray count];
     NSNumber * radian =[NSNumber numberWithFloat:1/numbers];
     
-    if ([_weakSelfColors count]!=_BtnNumbers) {
+    if ([_weakSelfColors count]!=[_BtnTitlesArray count]) {
         _weakSelfColors =@[RGBColor(255, 0, 0),RGBColor(255, 153, 0),RGBColor(221, 221, 221),RGBColor(0, 0, 0),RGBColor(255, 153, 0),RGBColor(221, 221, 221)];
     }
     
@@ -377,7 +387,7 @@
     CGFloat angle = 0;
     CGFloat end = -radian.floatValue *M_PI; //偏移半个格子弧度
     
-    for(NSInteger i =0;i<_BtnNumbers;i++){ //路径 拼接
+    for(NSInteger i =0;i<[_BtnTitlesArray count];i++){ //路径 拼接
         start =end;
         angle =radian.floatValue * 2*M_PI;
         end = start + angle;

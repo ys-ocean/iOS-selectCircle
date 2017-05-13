@@ -11,24 +11,20 @@
 @protocol CircleSelecteDelegate <NSObject>
 
 @optional
-//返回button 的title
+//返回buttons 的title
 - (NSArray *)buttonTitleWithItems;
-//返回button 的image
+//返回buttons 的image
 - (NSArray *)buttonImageWithItems;
-//返回button 的image 高亮状态
+//返回buttons 的image 高亮状态
 - (NSArray *)buttonHeightImageWithItems;
-//返回背景区域的颜色值
+//返回扇形背景区域的颜色值
 - (NSArray *)weakSelfColors;
-//button 按钮方法
-- (void)ButtonClick:(NSInteger)Tag;
-//返回默认区域的button
-- (void)DefaultReturnButton:(UIButton *)button;
-
-@required
-//返回button 的个数
-- (NSInteger)buttonWithNumbers;
 //返回button 的size
 - (CGSize)buttonWithSIze;
+//button 按钮方法
+- (void)buttonClick:(NSInteger)Tag;
+//返回默认区域的button
+- (void)defaultReturnButton:(UIButton *)button;
 @end
 
 @interface CircleSelectView : UIView
@@ -37,7 +33,11 @@
 
 - (void)setViewDelegate:(id<CircleSelecteDelegate>)delegate;
 
+//中心button的图片
 @property (copy ,nonatomic)NSString *centerImage;
+
+//中心button的大小Size
+@property (assign ,nonatomic)CGSize centerButtonSize;
 
 //初始化控件方法
 - (instancetype)initWithFrame:(CGRect)frame;
