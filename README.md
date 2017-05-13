@@ -3,4 +3,4 @@
 
 演示动画
 ==========
-![](https://github.com/xhisdai/SelectCircle/raw/master/showGif/circle.gif)
+![](https://github.com/xhisdai/SelectCircle/blob/master/showGif/cricle.gif)
