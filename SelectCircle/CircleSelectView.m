@@ -42,7 +42,7 @@
  */
 - (instancetype)initWithFrame:(CGRect)frame{
     
-    if (self =[super initWithFrame:frame]) {
+    if (self =[super initWithFrame:frame]){
         
         [self CreateSelfViewUI:frame];
         
@@ -73,7 +73,7 @@
 - (void)CreateHeaderImageUI{
     
     UIButton * header =[UIButton buttonWithType:UIButtonTypeCustom];
-    [header setImage:[UIImage imageNamed:@"222"] forState:UIControlStateNormal];
+    [header setImage:[UIImage imageNamed:@"image.bundle/222.png"] forState:UIControlStateNormal];
     [self addSubview:header];
     [self bringSubviewToFront:header];
     header.backgroundColor =[UIColor grayColor];

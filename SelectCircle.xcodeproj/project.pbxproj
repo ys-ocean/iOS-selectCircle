@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C10D5F91EC6AAA4003DF26D /* image.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C10D5F81EC6AAA4003DF26D /* image.bundle */; };
 		7C2C24A81EC57D9700E632BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C24A71EC57D9700E632BA /* main.m */; };
 		7C2C24AB1EC57D9700E632BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C24AA1EC57D9700E632BA /* AppDelegate.m */; };
 		7C2C24AE1EC57D9700E632BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C24AD1EC57D9700E632BA /* ViewController.m */; };
@@ -14,10 +15,10 @@
 		7C2C24B31EC57D9700E632BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2C24B21EC57D9700E632BA /* Assets.xcassets */; };
 		7C2C24B61EC57D9700E632BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C2C24B41EC57D9700E632BA /* LaunchScreen.storyboard */; };
 		7C2C24C11EC57DB200E632BA /* CircleSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C24BE1EC57DB200E632BA /* CircleSelectView.m */; };
-		7C2C24C21EC57DB200E632BA /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C24C01EC57DB200E632BA /* NSString+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C10D5F81EC6AAA4003DF26D /* image.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = image.bundle; sourceTree = "<group>"; };
 		7C2C24A31EC57D9700E632BA /* SelectCircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelectCircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2C24A71EC57D9700E632BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2C24A91EC57D9700E632BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -30,8 +31,6 @@
 		7C2C24B71EC57D9700E632BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C2C24BD1EC57DB100E632BA /* CircleSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSelectView.h; sourceTree = "<group>"; };
 		7C2C24BE1EC57DB200E632BA /* CircleSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSelectView.m; sourceTree = "<group>"; };
-		7C2C24BF1EC57DB200E632BA /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
-		7C2C24C01EC57DB200E632BA /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +69,7 @@
 				7C2C24AD1EC57D9700E632BA /* ViewController.m */,
 				7C2C24BD1EC57DB100E632BA /* CircleSelectView.h */,
 				7C2C24BE1EC57DB200E632BA /* CircleSelectView.m */,
-				7C2C24BF1EC57DB200E632BA /* NSString+Extension.h */,
-				7C2C24C01EC57DB200E632BA /* NSString+Extension.m */,
+				7C10D5F81EC6AAA4003DF26D /* image.bundle */,
 				7C2C24AF1EC57D9700E632BA /* Main.storyboard */,
 				7C2C24B21EC57D9700E632BA /* Assets.xcassets */,
 				7C2C24B41EC57D9700E632BA /* LaunchScreen.storyboard */,
@@ -150,6 +148,7 @@
 				7C2C24B61EC57D9700E632BA /* LaunchScreen.storyboard in Resources */,
 				7C2C24B31EC57D9700E632BA /* Assets.xcassets in Resources */,
 				7C2C24B11EC57D9700E632BA /* Main.storyboard in Resources */,
+				7C10D5F91EC6AAA4003DF26D /* image.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +159,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C2C24C21EC57DB200E632BA /* NSString+Extension.m in Sources */,
 				7C2C24AE1EC57D9700E632BA /* ViewController.m in Sources */,
 				7C2C24AB1EC57D9700E632BA /* AppDelegate.m in Sources */,
 				7C2C24C11EC57DB200E632BA /* CircleSelectView.m in Sources */,
@@ -323,6 +321,7 @@
 				7C2C24BC1EC57D9700E632BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
