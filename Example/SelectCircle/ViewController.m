@@ -22,16 +22,17 @@
     
     CircleSelectView * view =[[CircleSelectView alloc]initWithFrame:CGRectMake(100, 50, 300, 300)];
     view.centerImage =@"";
+    view.centerButtonSize =CGSizeMake(100, 100);
     [view setViewDelegate:self];
     [self.view addSubview:view];
     
 }
 - (void)viewWillAppear:(BOOL)animated{
-    
+    [super viewWillAppear:animated];
 }
 
 #pragma mark --CircleButtonClick
-- (void)ButtonClick:(NSInteger)Tag
+- (void)buttonClick:(NSInteger)Tag
 {
     
     NSArray * array =@[@"一",@"二",@"三",@"四",@"五",@"六"];
@@ -39,7 +40,7 @@
     [self MsgShowVC:msg];
 }
 
-- (void)DefaultReturnButton:(UIButton *)button{
+- (void)defaultReturnButton:(UIButton *)button{
     
     self.showLabel.text =[NSString stringWithFormat:@"已选中的是:%@",[button titleForState:UIControlStateNormal]];
 }
@@ -60,10 +61,6 @@
 - (NSArray *)weakSelfColors{
     
     return @[RGBColor(255, 0, 0),RGBColor(255, 153, 0),RGBColor(221, 221, 221),RGBColor(0, 0, 0),RGBColor(255, 153, 0),RGBColor(221, 221, 221)];
-}
-
-- (NSInteger)buttonWithNumbers{
-    return 6;
 }
 
 - (CGSize)buttonWithSIze{
