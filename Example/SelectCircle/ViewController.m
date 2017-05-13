@@ -21,6 +21,7 @@
     [super viewDidLoad];
     
     CircleSelectView * view =[[CircleSelectView alloc]initWithFrame:CGRectMake(100, 50, 300, 300)];
+    view.centerImage =@"";
     [view setViewDelegate:self];
     [self.view addSubview:view];
     
