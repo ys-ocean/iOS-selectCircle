@@ -12,7 +12,7 @@
 
 
 @interface ViewController ()<CircleSelecteDelegate>
-
+@property (weak, nonatomic) CircleSelectView *weak_selectView;
 @end
 
 @implementation ViewController
@@ -25,10 +25,18 @@
     view.centerButtonSize =CGSizeMake(100, 100);
     [view setViewDelegate:self];
     [self.view addSubview:view];
+    self.weak_selectView = view;
     
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+}
+- (IBAction)actionClick:(id)sender {
+    [self.weak_selectView startAnimation];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.weak_selectView stopAnimation];
+        [self.weak_selectView runLocation:180];
+    });
 }
 
 #pragma mark --CircleButtonClick

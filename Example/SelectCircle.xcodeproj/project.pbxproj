@@ -118,6 +118,7 @@
 				TargetAttributes = {
 					7C2C24A21EC57D9700E632BA = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = NNA2RM84GE;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -127,6 +128,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -284,6 +286,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NNA2RM84GE;
 				INFOPLIST_FILE = SelectCircle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hhf.SelectCircle;
@@ -295,6 +298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NNA2RM84GE;
 				INFOPLIST_FILE = SelectCircle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hhf.SelectCircle;

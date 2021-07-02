@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,12 +25,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCs-IK-LFf">
+                                <rect key="frame" x="67.5" y="563" width="240" height="34"/>
+                                <state key="normal" title="点击转动180°停留在指定位置">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iIJ-Kv-klR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wgH-ue-iEZ" secondAttribute="bottom" constant="33" id="2ON-af-yK3"/>
                             <constraint firstItem="wgH-ue-iEZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="D2B-D7-3f0"/>
+                            <constraint firstItem="QCs-IK-LFf" firstAttribute="centerX" secondItem="wgH-ue-iEZ" secondAttribute="centerX" id="Dlh-Zb-70o"/>
                             <constraint firstAttribute="trailing" secondItem="wgH-ue-iEZ" secondAttribute="trailing" id="e4w-lQ-xg4"/>
+                            <constraint firstItem="wgH-ue-iEZ" firstAttribute="top" secondItem="QCs-IK-LFf" secondAttribute="bottom" constant="16" id="nhX-an-tmN"/>
                         </constraints>
                     </view>
                     <connections>

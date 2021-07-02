@@ -41,4 +41,8 @@
 
 //初始化控件方法
 - (instancetype)initWithFrame:(CGRect)frame;
+
+- (void)startAnimation;
+- (void)stopAnimation;
+- (void)runLocation:(double)angle;
 @end

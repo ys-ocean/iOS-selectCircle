@@ -12,6 +12,7 @@
 
 @interface CircleSelectView()
 {
+    UIView * _btnBgView;
     NSMutableArray * _BtnsArray; //所有的按钮集合数组
     NSArray * _BtnTitlesArray; //按钮的title数组
     NSArray * _BtnImagesArray; //按钮的图片数组
@@ -44,9 +45,11 @@
     
     if (self =[super initWithFrame:frame]){
         
+        
         [self CreateSelfViewUI:frame];
         
         [self addTapGestureRecognizer];
+        
     }
     return self;
 }
@@ -60,6 +63,10 @@
     [self GetButtonData]; //获取所有数据
     
     [self drawViewUI]; //画颜色背景
+    
+    _btnBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    _btnBgView.backgroundColor = [UIColor clearColor];
+    [self addSubview:_btnBgView];
     
     [self CreateButtonUI]; //创建button UI
     
@@ -173,7 +180,7 @@
         button.backgroundColor =[UIColor grayColor];
         button.layer.cornerRadius =button.frame.size.width/2;
         button.tag =BTNTAG +i;
-        [self addSubview:button];
+        [_btnBgView addSubview:button];
         [_BtnsArray addObject:button];
         
         [button setTitle:(NSString *)[_BtnTitlesArray objectAtIndex:i] forState:UIControlStateNormal];
@@ -202,16 +209,13 @@
 /*
  * 调整按钮中心位置
  */
-- (void)BtnsLayout{
-    
+- (void)BtnsLayout {
     for (NSInteger i=0; i<[_BtnTitlesArray count] ;i++) {
-        
         UIButton *button=[_BtnsArray objectAtIndex:i];
         CGFloat number =[_BtnTitlesArray count];
         CGFloat yy=Radius+sin((i/number)*M_PI*2+RunAngle)*(self.frame.size.width/2-_BtnSize.width/2-SPACE);
         CGFloat xx=Radius+cos((i/number)*M_PI*2+RunAngle)*(self.frame.size.width/2-_BtnSize.width/2-SPACE);
         button.center=CGPointMake(xx, yy);
-
     }
 }
 
@@ -229,8 +233,7 @@
 /*
  * 滑动手势
  */
-- (void)CircleViewGesture:(UIPanGestureRecognizer *)gesture{
-    
+- (void)CircleViewGesture:(UIPanGestureRecognizer *)gesture {
     
     if (gesture.state ==UIGestureRecognizerStateBegan) {
         TapAngle = 0;
@@ -291,7 +294,7 @@
 /*
  * 传出默认选项值
  */
-- (void)ReturnDefaultButton{
+- (void)ReturnDefaultButton {
     
     CGFloat number=[_BtnTitlesArray count];
     NSNumber * end =[NSNumber numberWithFloat:0.5* (1/number) *M_PI];//横坐标对应0 ，-0 纵坐标对应1，-1
@@ -371,7 +374,7 @@
 /*
  * 画颜色背景
  */
-- (void)drawViewUI{
+- (void)drawViewUI {
     
     CGFloat numbers =[_BtnTitlesArray count];
     NSNumber * radian =[NSNumber numberWithFloat:1/numbers];
@@ -411,12 +414,34 @@
     }
 
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
+BOOL animating;
+- (void)spinWithOptions:(UIViewAnimationOptions)options {
+    [UIView animateWithDuration:0.1 delay:0.0 options:options animations:^{
+        _btnBgView.transform = CGAffineTransformRotate(_btnBgView.transform, M_PI / 2);
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (animating) {
+                [self spinWithOptions: UIViewAnimationOptionCurveLinear];
+            }
+        }
+    }];
+}
+- (void)startAnimation {
+    if (!animating) {
+        animating = YES;
+        [self spinWithOptions:UIViewAnimationOptionCurveEaseIn];
+    }
+}
+- (void)stopAnimation {
+    animating = NO;
+    _btnBgView.transform = CGAffineTransformIdentity;
+}
+
+- (void)runLocation:(double)angle {
+    CGFloat value = angle/360.0;
+    RunAngle = value * 2 * M_PI;
+    [self RunAngleValue];
+    [self BtnsLayout];
+}
 @end
